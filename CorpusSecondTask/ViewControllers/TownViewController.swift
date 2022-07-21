@@ -10,27 +10,37 @@ import Alamofire
 
 class TownViewController: UIViewController {
     
+    var isShowTownsList = true
     private var townsTableView = UITableView()
     private var towns: [TownModel] = [] {
         didSet {
             townsTableView.reloadData()
         }
     }
+    var places: [PlacesModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Вылучыце горад"
         view.backgroundColor = .brown
         navigationController?.navigationBar.prefersLargeTitles = true
-//        navigationController?.navigationBar.isTranslucent = true
         setupTableView()
-        loadTowns()
+        if isShowTownsList {
+            title = "Вылучыце горад"
+            loadTowns()
+        }
     }
     
     private func loadTowns() {
         AF.request("https://krokapp.by/api/get_cities/11/").responseDecodable(of: [TownModel].self) { [weak self] response in
             guard let value = response.value else { return }
             self?.towns = value.filter({$0.lang == 1})
+        }
+        AF.request("https://krokapp.by/api/get_points/11/").responseDecodable(of: [PlacesModel].self) { [weak self] response in
+            guard let value = response.value else {
+                print("Error")
+                return
+            }
+            self?.places = value.filter({$0.lang == 1})
         }
     }
     
@@ -53,18 +63,26 @@ class TownViewController: UIViewController {
 
 extension TownViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return towns.count
+        return isShowTownsList ? towns.count : places.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "townCell", for: indexPath)
-        cell.textLabel?.text = towns[indexPath.row].name
+        cell.textLabel?.text = isShowTownsList ? towns[indexPath.row].name : places[indexPath.row].name
         cell.backgroundColor = .clear
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("select \(towns[indexPath.row].name) town")
         townsTableView.deselectRow(at: indexPath, animated: true)
+        if isShowTownsList {
+            let placesVC = TownViewController()
+            placesVC.isShowTownsList = false
+            placesVC.title = towns[indexPath.row].name
+            placesVC.places = places.filter({$0.city_id == towns[indexPath.row].id})
+            navigationController?.pushViewController(placesVC, animated: true)
+        } else {
+            print("last VC \(places[indexPath.row].name)")
+        }
     }
 }
 

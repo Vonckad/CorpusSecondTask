@@ -18,6 +18,7 @@
 		E3CEAC2C2889F00E00060890 /* CorpusSecondTaskUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CEAC2B2889F00E00060890 /* CorpusSecondTaskUITests.swift */; };
 		E3CEAC2E2889F00E00060890 /* CorpusSecondTaskUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CEAC2D2889F00E00060890 /* CorpusSecondTaskUITestsLaunchTests.swift */; };
 		E3CEAC3B2889F3B000060890 /* TownModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CEAC3A2889F3B000060890 /* TownModel.swift */; };
+		E3CEAC3F2889FD1900060890 /* PlacesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CEAC3E2889FD1900060890 /* PlacesModel.swift */; };
 		FBF46E5B08CF55D59F6C5544 /* Pods_CorpusSecondTaskTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6E45F8C878B077F4B010916 /* Pods_CorpusSecondTaskTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +61,7 @@
 		E3CEAC2B2889F00E00060890 /* CorpusSecondTaskUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorpusSecondTaskUITests.swift; sourceTree = "<group>"; };
 		E3CEAC2D2889F00E00060890 /* CorpusSecondTaskUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorpusSecondTaskUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		E3CEAC3A2889F3B000060890 /* TownModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TownModel.swift; sourceTree = "<group>"; };
+		E3CEAC3E2889FD1900060890 /* PlacesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesModel.swift; sourceTree = "<group>"; };
 		EC89B33F4EA6D1CBF0925E16 /* Pods-CorpusSecondTaskTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CorpusSecondTaskTests.debug.xcconfig"; path = "Target Support Files/Pods-CorpusSecondTaskTests/Pods-CorpusSecondTaskTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -169,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				E3CEAC3A2889F3B000060890 /* TownModel.swift */,
+				E3CEAC3E2889FD1900060890 /* PlacesModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -425,6 +428,7 @@
 				E3CEAC0B2889F00600060890 /* AppDelegate.swift in Sources */,
 				E3CEAC0D2889F00600060890 /* SceneDelegate.swift in Sources */,
 				E3CEAC3B2889F3B000060890 /* TownModel.swift in Sources */,
+				E3CEAC3F2889FD1900060890 /* PlacesModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
