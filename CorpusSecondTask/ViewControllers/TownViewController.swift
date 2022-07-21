@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  TownViewController.swift
 //  CorpusSecondTask
 //
 //  Created by Vlad Ralovich on 21.07.22.
@@ -8,7 +8,7 @@
 import UIKit
 import Alamofire
 
-class ViewController: UIViewController {
+class TownViewController: UIViewController {
     
     private var townsTableView = UITableView()
     private var towns: [TownModel] = [] {
@@ -19,9 +19,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Main VC"
+        title = "Вылучыце горад"
         view.backgroundColor = .brown
         navigationController?.navigationBar.prefersLargeTitles = true
+//        navigationController?.navigationBar.isTranslucent = true
         setupTableView()
         loadTowns()
     }
@@ -50,7 +51,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UITableViewDataSource, UITableViewDelegate {
+extension TownViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return towns.count
     }

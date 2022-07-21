@@ -11,7 +11,7 @@
 		328E23832605FD272EE4D0BC /* Pods_CorpusSecondTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 805FE7273DA2365D8628902D /* Pods_CorpusSecondTask.framework */; };
 		E3CEAC0B2889F00600060890 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CEAC0A2889F00600060890 /* AppDelegate.swift */; };
 		E3CEAC0D2889F00600060890 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CEAC0C2889F00600060890 /* SceneDelegate.swift */; };
-		E3CEAC0F2889F00600060890 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CEAC0E2889F00600060890 /* ViewController.swift */; };
+		E3CEAC0F2889F00600060890 /* TownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CEAC0E2889F00600060890 /* TownViewController.swift */; };
 		E3CEAC142889F00D00060890 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3CEAC132889F00D00060890 /* Assets.xcassets */; };
 		E3CEAC172889F00D00060890 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3CEAC152889F00D00060890 /* LaunchScreen.storyboard */; };
 		E3CEAC222889F00E00060890 /* CorpusSecondTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CEAC212889F00E00060890 /* CorpusSecondTaskTests.swift */; };
@@ -50,7 +50,7 @@
 		E3CEAC072889F00600060890 /* CorpusSecondTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CorpusSecondTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3CEAC0A2889F00600060890 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3CEAC0C2889F00600060890 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		E3CEAC0E2889F00600060890 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E3CEAC0E2889F00600060890 /* TownViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TownViewController.swift; sourceTree = "<group>"; };
 		E3CEAC132889F00D00060890 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E3CEAC162889F00D00060890 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E3CEAC182889F00D00060890 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -131,8 +131,8 @@
 			children = (
 				E3CEAC0A2889F00600060890 /* AppDelegate.swift */,
 				E3CEAC0C2889F00600060890 /* SceneDelegate.swift */,
-				E3CEAC0E2889F00600060890 /* ViewController.swift */,
-				E3CEAC3A2889F3B000060890 /* TownModel.swift */,
+				E3CEAC3C2889F99B00060890 /* ViewControllers */,
+				E3CEAC3D2889F9A700060890 /* Models */,
 				E3CEAC132889F00D00060890 /* Assets.xcassets */,
 				E3CEAC152889F00D00060890 /* LaunchScreen.storyboard */,
 				E3CEAC182889F00D00060890 /* Info.plist */,
@@ -155,6 +155,22 @@
 				E3CEAC2D2889F00E00060890 /* CorpusSecondTaskUITestsLaunchTests.swift */,
 			);
 			path = CorpusSecondTaskUITests;
+			sourceTree = "<group>";
+		};
+		E3CEAC3C2889F99B00060890 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E3CEAC0E2889F00600060890 /* TownViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		E3CEAC3D2889F9A700060890 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E3CEAC3A2889F3B000060890 /* TownModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		F6C9D8B0023612A3A1F1CDF7 /* Frameworks */ = {
@@ -405,7 +421,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3CEAC0F2889F00600060890 /* ViewController.swift in Sources */,
+				E3CEAC0F2889F00600060890 /* TownViewController.swift in Sources */,
 				E3CEAC0B2889F00600060890 /* AppDelegate.swift in Sources */,
 				E3CEAC0D2889F00600060890 /* SceneDelegate.swift in Sources */,
 				E3CEAC3B2889F3B000060890 /* TownModel.swift in Sources */,
