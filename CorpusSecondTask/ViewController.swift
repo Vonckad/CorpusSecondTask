@@ -11,9 +11,9 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        title = "Main VC"
+        view.backgroundColor = .brown
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
-
-
 }
 
