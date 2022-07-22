@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Kingfisher
 
 class ListTableViewCell: UITableViewCell {
     
@@ -18,7 +19,6 @@ class ListTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configure()
-//        selectionStyle = .none
     }
     
     required init?(coder: NSCoder) {
@@ -27,7 +27,11 @@ class ListTableViewCell: UITableViewCell {
     
     func addData(title: String, urlImage: String) {
         titleLabel.text = title
-        print("urlImage = \(urlImage)")
+        myImageView.kf.indicatorType = .activity
+        guard let url = URL(string: urlImage) else { return }
+        KF.url(url)
+            .fade(duration: 1)
+            .set(to: myImageView)
     }
 }
 
@@ -36,6 +40,7 @@ extension ListTableViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.clipsToBounds = true
         
+        myImageView.contentMode = .scaleAspectFit
         myImageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
@@ -45,7 +50,6 @@ extension ListTableViewCell {
         
         titleLabel.font = .systemFont(ofSize: 20)
         titleLabel.numberOfLines = 0
-        titleLabel.adjustsFontSizeToFitWidth = true
         
         let spacing = CGFloat(24)
         NSLayoutConstraint.activate([
@@ -54,16 +58,16 @@ extension ListTableViewCell {
             view.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -spacing),
             view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -spacing),
             
+            myImageView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            myImageView.topAnchor.constraint(equalTo: view.topAnchor),
+            myImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            myImageView.widthAnchor.constraint(equalToConstant: 80),
+            myImageView.heightAnchor.constraint(equalToConstant: 80),
+            
             titleLabel.topAnchor.constraint(equalTo: view.topAnchor),
-            titleLabel.leftAnchor.constraint(equalTo: view.leftAnchor),
-            titleLabel.rightAnchor.constraint(equalTo: myImageView.leftAnchor),
-            titleLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            myImageView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -11),
-            myImageView.topAnchor.constraint(equalTo: titleLabel.topAnchor),
-            
-            myImageView.widthAnchor.constraint(equalToConstant: 42),
-            myImageView.heightAnchor.constraint(equalToConstant: 42),
+            titleLabel.rightAnchor.constraint(equalTo: view.rightAnchor),
+            titleLabel.leftAnchor.constraint(equalTo: myImageView.rightAnchor, constant: spacing),
+            titleLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 }

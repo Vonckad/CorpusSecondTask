@@ -17,7 +17,7 @@ struct PlacesModel: Decodable {
 //    var creation_date: String?
 //    var lat: Float?
 //    var lng: Float?
-//    var logo: String?
+    var logo: String?
 //    var photo: String?
     var city_id: Int
 //    var visible: Bool

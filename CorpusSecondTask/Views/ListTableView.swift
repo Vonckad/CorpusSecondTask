@@ -28,9 +28,8 @@ class ListTableView: UITableView {
         delegate = self
         dataSource = self
         register(ListTableViewCell.self, forCellReuseIdentifier: ListTableViewCell.reuseIdentifier)
-        separatorStyle = .none
-        rowHeight = UITableView.automaticDimension
-        estimatedRowHeight = 600
+//        rowHeight = UITableView.automaticDimension
+//        estimatedRowHeight = 600
     }
     
     required init?(coder: NSCoder) {
@@ -50,7 +49,7 @@ extension ListTableView: UITableViewDelegate, UITableViewDataSource {
             cell.addData(title: town.name, urlImage: town.logo)
         } else {
             let place = places[indexPath.row]
-            cell.addData(title: place.name, urlImage: "img")
+            cell.addData(title: place.name, urlImage: place.logo ?? "")
         }
         
         return cell

@@ -7,6 +7,7 @@ target 'CorpusSecondTask' do
 
   # Pods for CorpusSecondTask
 	pod 'Alamofire'
+	pod 'Kingfisher'
   target 'CorpusSecondTaskTests' do
     inherit! :search_paths
     # Pods for testing
