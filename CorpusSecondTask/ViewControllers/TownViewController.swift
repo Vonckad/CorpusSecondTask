@@ -8,81 +8,82 @@
 import UIKit
 import Alamofire
 
+protocol TownViewControllerDelegate {
+    func loadedPlaces(places: [PlacesModel]?)
+}
+
 class TownViewController: UIViewController {
     
-    var isShowTownsList = true
-    private var townsTableView = UITableView()
-    private var towns: [TownModel] = [] {
-        didSet {
-            townsTableView.reloadData()
-        }
-    }
-    var places: [PlacesModel] = []
+    var activityView = UIActivityIndicatorView()
+    var delegate: TownViewControllerDelegate?
+    private var townsTableView = ListTableView()
+    private var places: [PlacesModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .brown
+        view.backgroundColor = .white
         navigationController?.navigationBar.prefersLargeTitles = true
         setupTableView()
-        if isShowTownsList {
-            title = "Вылучыце горад"
-            loadTowns()
-        }
+        loadTowns()
+        title = "Вылучыце горад"
     }
     
     private func loadTowns() {
-        AF.request("https://krokapp.by/api/get_cities/11/").responseDecodable(of: [TownModel].self) { [weak self] response in
-            guard let value = response.value else { return }
-            self?.towns = value.filter({$0.lang == 1})
-        }
-        AF.request("https://krokapp.by/api/get_points/11/").responseDecodable(of: [PlacesModel].self) { [weak self] response in
-            guard let value = response.value else {
-                print("Error")
-                return
+        setupActivityView()
+            AF.request("https://krokapp.by/api/get_cities/11/").responseDecodable(of: [TownModel].self) { [weak self] response in
+                guard let value = response.value else {
+                    self?.showAlert()
+                    return
+                }
+                self?.townsTableView.towns = value.filter({$0.lang == 1})
+                self?.activityView.stopAnimating()
             }
-            self?.places = value.filter({$0.lang == 1})
-        }
+            AF.request("https://krokapp.by/api/get_points/11/").responseDecodable(of: [PlacesModel].self) { [weak self] response in
+                guard let value = response.value else {
+                    self?.showAlert()
+                    return
+                }
+                self?.places = value.filter({$0.lang == 1})
+                self?.delegate?.loadedPlaces(places: self?.places)
+                self?.activityView.stopAnimating()
+            }
     }
     
     private func setupTableView() {
-        townsTableView.dataSource = self
-        townsTableView.delegate = self
-        townsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "townCell")
-        townsTableView.translatesAutoresizingMaskIntoConstraints = false
-        townsTableView.backgroundColor = .clear
+        townsTableView.frame = view.frame
+        townsTableView.listDelegate = self
         view.addSubview(townsTableView)
-        let guide = view.safeAreaLayoutGuide
-        NSLayoutConstraint.activate([
-            townsTableView.topAnchor.constraint(equalTo: view.topAnchor),
-            townsTableView.leftAnchor.constraint(equalTo: guide.leftAnchor),
-            townsTableView.rightAnchor.constraint(equalTo: guide.rightAnchor),
-            townsTableView.bottomAnchor.constraint(equalTo: guide.bottomAnchor)
-        ])
-    }
-}
-
-extension TownViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return isShowTownsList ? towns.count : places.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "townCell", for: indexPath)
-        cell.textLabel?.text = isShowTownsList ? towns[indexPath.row].name : places[indexPath.row].name
-        cell.backgroundColor = .clear
-        return cell
+    private func setupActivityView() {
+        view.addSubview(activityView)
+        activityView.translatesAutoresizingMaskIntoConstraints = false
+        activityView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        activityView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        activityView.hidesWhenStopped = true
+        activityView.style = .large
+        activityView.startAnimating()
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        townsTableView.deselectRow(at: indexPath, animated: true)
-        if isShowTownsList {
-            let placesVC = TownViewController()
-            placesVC.isShowTownsList = false
-            placesVC.title = towns[indexPath.row].name
-            placesVC.places = places.filter({$0.city_id == towns[indexPath.row].id})
-            navigationController?.pushViewController(placesVC, animated: true)
-        } else {
-            print("last VC \(places[indexPath.row].name)")
+    private func showAlert() {
+        let alert = UIAlertController(title: "Здарылася памылка", message: "Праверце подключэнне да інернета", preferredStyle: .alert)
+        let actionCancel = UIAlertAction(title: "Адмена", style: .destructive)
+        let reloadAction = UIAlertAction(title: "Абнавіць", style: .default) { [weak self] _ in
+            self?.loadTowns()
         }
+        alert.addAction(actionCancel)
+        alert.addAction(reloadAction)
+        present(alert, animated: true)
     }
 }
 
+extension TownViewController: ListTableViewDelegate {
+    func selectCell(indexPath: IndexPath) {
+        let placesVC = PlacesViewController()
+        placesVC.currentTown = townsTableView.towns[indexPath.row]
+        if !places.isEmpty {
+            placesVC.townsTableView.places = places.filter({$0.city_id == townsTableView.towns[indexPath.row].id})
+        }
+        delegate = placesVC
+        navigationController?.pushViewController(placesVC, animated: true)
+    }
+}
