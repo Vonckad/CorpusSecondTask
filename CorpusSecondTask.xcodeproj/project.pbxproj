@@ -12,6 +12,8 @@
 		E3833CCD288AC4E8009244AA /* PlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3833CCC288AC4E8009244AA /* PlacesViewController.swift */; };
 		E3833CD0288AC513009244AA /* ListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3833CCF288AC513009244AA /* ListTableView.swift */; };
 		E3833CD2288AC699009244AA /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3833CD1288AC699009244AA /* ListTableViewCell.swift */; };
+		E3833CD4288B4E2B009244AA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3833CD3288B4E2B009244AA /* DetailViewController.swift */; };
+		E3833CD6288B50B0009244AA /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3833CD5288B50B0009244AA /* StringExtension.swift */; };
 		E3CEAC0B2889F00600060890 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CEAC0A2889F00600060890 /* AppDelegate.swift */; };
 		E3CEAC0D2889F00600060890 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CEAC0C2889F00600060890 /* SceneDelegate.swift */; };
 		E3CEAC0F2889F00600060890 /* TownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CEAC0E2889F00600060890 /* TownViewController.swift */; };
@@ -54,6 +56,8 @@
 		E3833CCC288AC4E8009244AA /* PlacesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesViewController.swift; sourceTree = "<group>"; };
 		E3833CCF288AC513009244AA /* ListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableView.swift; sourceTree = "<group>"; };
 		E3833CD1288AC699009244AA /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
+		E3833CD3288B4E2B009244AA /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		E3833CD5288B50B0009244AA /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		E3CEAC072889F00600060890 /* CorpusSecondTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CorpusSecondTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3CEAC0A2889F00600060890 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3CEAC0C2889F00600060890 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -148,6 +152,7 @@
 			children = (
 				E3CEAC0A2889F00600060890 /* AppDelegate.swift */,
 				E3CEAC0C2889F00600060890 /* SceneDelegate.swift */,
+				E3833CD5288B50B0009244AA /* StringExtension.swift */,
 				E3833CCE288AC4FD009244AA /* Views */,
 				E3CEAC3C2889F99B00060890 /* ViewControllers */,
 				E3CEAC3D2889F9A700060890 /* Models */,
@@ -180,6 +185,7 @@
 			children = (
 				E3CEAC0E2889F00600060890 /* TownViewController.swift */,
 				E3833CCC288AC4E8009244AA /* PlacesViewController.swift */,
+				E3833CD3288B4E2B009244AA /* DetailViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -441,7 +447,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3833CD4288B4E2B009244AA /* DetailViewController.swift in Sources */,
 				E3833CD0288AC513009244AA /* ListTableView.swift in Sources */,
+				E3833CD6288B50B0009244AA /* StringExtension.swift in Sources */,
 				E3833CD2288AC699009244AA /* ListTableViewCell.swift in Sources */,
 				E3833CCD288AC4E8009244AA /* PlacesViewController.swift in Sources */,
 				E3CEAC0F2889F00600060890 /* TownViewController.swift in Sources */,

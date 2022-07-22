@@ -17,6 +17,7 @@ class PlacesViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationItem.backButtonTitle = ""
         title = currentTown.name
         setupTableView()
         if townsTableView.places.isEmpty { setupActivityView() }
@@ -50,6 +51,7 @@ extension PlacesViewController: TownViewControllerDelegate {
 
 extension PlacesViewController: ListTableViewDelegate {
     func selectCell(indexPath: IndexPath) {
-        print("new VC \(townsTableView.places[indexPath.row].name)")
+        let detailVC = DetailViewController(data: townsTableView.places[indexPath.row])
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }

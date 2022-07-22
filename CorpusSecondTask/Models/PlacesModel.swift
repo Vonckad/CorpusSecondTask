@@ -14,14 +14,14 @@ struct PlacesModel: Decodable {
 //    var sound: String?
     var lang: Int
 //    var last_edit_time: Int?
-//    var creation_date: String?
+    var creation_date: String
 //    var lat: Float?
 //    var lng: Float?
     var logo: String?
 //    var photo: String?
     var city_id: Int
 //    var visible: Bool
-//    var images: [String]?
+    var images: [String]?
 //    var tags: [Int]?
 //    var is_excursion: Bool?
 }
