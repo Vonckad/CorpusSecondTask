@@ -17,10 +17,21 @@ class PlacesViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationItem.backButtonTitle = ""
+        navigationItem.backButtonTitle = ""
         title = currentTown.name
         setupTableView()
         if townsTableView.places.isEmpty { setupActivityView() }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.largeTitleDisplayMode = .always
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.navigationController?.navigationBar.prefersLargeTitles = false
     }
     
     private func setupTableView() {

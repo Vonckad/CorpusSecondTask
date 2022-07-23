@@ -23,7 +23,7 @@ class TownViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationItem.backButtonTitle = ""
+        navigationItem.backButtonTitle = ""
         setupTableView()
         loadTowns()
         title = "Гарады"

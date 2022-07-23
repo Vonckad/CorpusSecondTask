@@ -21,7 +21,7 @@ struct PlacesModel: Decodable {
 //    var photo: String?
     var city_id: Int
 //    var visible: Bool
-    var images: [String]?
+    var images: [String]
 //    var tags: [Int]?
 //    var is_excursion: Bool?
 }

@@ -14,7 +14,8 @@ class DetailViewController: UIViewController {
     private var titleLabel: UILabel!
     private var createDateLabel: UILabel!
     private var descriptionLabel: UILabel!
-    private var imageView: UIImageView!
+    private var scrollView: UIScrollView!
+    private var pageControl: UIPageControl!
     
     init(data: PlacesModel) {
         self.data = data
@@ -27,24 +28,26 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.prefersLargeTitles = false
-        view.backgroundColor = UIColor(red: 238/255, green: 235/255, blue: 248/255, alpha: 1)
+        view.backgroundColor = .white
+        navigationItem.largeTitleDisplayMode = .never
+        title = ""
         setupUI()
         addData()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.navigationBar.prefersLargeTitles = true
-
-    }
-    
     private func addData() {
-        guard let url = URL(string: data.images?.first ?? "") else { return }
-        imageView.kf.indicatorType = .activity
-        imageView.kf.setImage(with: url)
-        title = ""
-        createDateLabel.text = data.creation_date
+        
+        scrollView.contentSize = CGSize(width: CGFloat(data.images.count) * view.frame.size.width, height: view.frame.size.height / 3)
+        
+        for (index, img) in data.images.enumerated() {
+            guard let url = URL(string: img) else { return }
+            let imgView = UIImageView(frame: CGRect(x: CGFloat(index) * view.frame.size.width, y: 0, width: view.frame.size.width, height: view.frame.size.height / 3))
+                imgView.kf.indicatorType = .activity
+                imgView.kf.setImage(with: url)
+            scrollView.addSubview(imgView)
+        }
+        pageControl.numberOfPages = data.images.count
+        createDateLabel.text = "Дата публікацыі: " + data.creation_date.replacingOccurrences(of: "-", with: ".")
         descriptionLabel.text = .init(htmlEncodedString: data.text ?? "")
         titleLabel.text = data.name
     }
@@ -52,37 +55,54 @@ class DetailViewController: UIViewController {
 
 extension DetailViewController {
     private func setupUI() {
-        imageView = UIImageView()
+        scrollView = UIScrollView()
         createDateLabel = UILabel()
         descriptionLabel = UILabel()
         titleLabel = UILabel()
         
-        view.addSubview(imageView)
+        view.addSubview(scrollView)
         view.addSubview(createDateLabel)
         view.addSubview(descriptionLabel)
         view.addSubview(titleLabel)
-//        titleLabel
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         createDateLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        imageView.contentMode = .scaleAspectFit
+    
         descriptionLabel.numberOfLines = 0
         titleLabel.numberOfLines = 0
         titleLabel.textAlignment = .center
         titleLabel.font = .boldSystemFont(ofSize: 20)
         
+        scrollView.delegate = self
+        scrollView.isPagingEnabled = true
+        scrollView.bounces = false
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.contentInsetAdjustmentBehavior = .never
+        
+        pageControl = UIPageControl()
+        view.addSubview(pageControl)
+        pageControl.translatesAutoresizingMaskIntoConstraints = false
+        pageControl.isUserInteractionEnabled = false
+        pageControl.currentPageIndicatorTintColor = .black
+        pageControl.pageIndicatorTintColor = .gray
+        
         let guide = view.safeAreaLayoutGuide
         let spacing = CGFloat(16)
         
         NSLayoutConstraint.activate([
-            imageView.heightAnchor.constraint(equalToConstant: view.frame.height / 3),
-            imageView.topAnchor.constraint(equalTo: guide.topAnchor),
-            imageView.leftAnchor.constraint(equalTo: guide.leftAnchor, constant: spacing),
-            imageView.rightAnchor.constraint(equalTo: guide.rightAnchor, constant: -spacing),
+            scrollView.heightAnchor.constraint(equalToConstant: view.frame.height / 3),
+            scrollView.topAnchor.constraint(equalTo: guide.topAnchor),
+            scrollView.leftAnchor.constraint(equalTo: guide.leftAnchor),
+            scrollView.rightAnchor.constraint(equalTo: guide.rightAnchor),
             
-            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: spacing),
+            pageControl.leftAnchor.constraint(equalTo: guide.leftAnchor),
+            pageControl.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 8),
+            pageControl.rightAnchor.constraint(equalTo: guide.rightAnchor),
+            
+            titleLabel.topAnchor.constraint(equalTo: pageControl.bottomAnchor, constant: spacing),
             titleLabel.leftAnchor.constraint(equalTo: guide.leftAnchor, constant: spacing),
             titleLabel.rightAnchor.constraint(equalTo: guide.rightAnchor, constant: -spacing),
             
@@ -95,5 +115,11 @@ extension DetailViewController {
             createDateLabel.rightAnchor.constraint(equalTo: guide.rightAnchor, constant: -spacing),
             createDateLabel.bottomAnchor.constraint(lessThanOrEqualTo: guide.bottomAnchor, constant: -spacing)
         ])
+    }
+}
+
+extension DetailViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        pageControl.currentPage = Int(floor(Float(scrollView.contentOffset.x / scrollView.frame.size.width)))
     }
 }
