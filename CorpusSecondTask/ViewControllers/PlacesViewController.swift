@@ -15,6 +15,7 @@ class PlacesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        overrideUserInterfaceStyle = .light
         view.backgroundColor = .white
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.backButtonTitle = ""

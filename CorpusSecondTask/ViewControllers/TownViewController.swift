@@ -21,6 +21,7 @@ class TownViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        overrideUserInterfaceStyle = .light
         view.backgroundColor = .white
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.backButtonTitle = ""

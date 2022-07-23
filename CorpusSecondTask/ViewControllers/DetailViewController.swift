@@ -28,6 +28,7 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        overrideUserInterfaceStyle = .light
         view.backgroundColor = .white
         navigationItem.largeTitleDisplayMode = .never
         title = ""
