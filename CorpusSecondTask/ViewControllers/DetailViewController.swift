@@ -14,6 +14,8 @@ class DetailViewController: UIViewController {
     private var titleLabel: UILabel!
     private var createDateLabel: UILabel!
     private var descriptionLabel: UILabel!
+    private var mainScrollView: UIScrollView!
+    private var contentView: UIView!
     private var scrollView: UIScrollView!
     private var pageControl: UIPageControl!
     
@@ -32,6 +34,11 @@ class DetailViewController: UIViewController {
         view.backgroundColor = .white
         navigationItem.largeTitleDisplayMode = .never
         title = ""
+        mainScrollView = UIScrollView(frame: view.frame)
+        contentView = UIView(frame: view.frame)
+        mainScrollView.contentSize = contentView.bounds.size//.init(width: view.frame.width, height: view.frame.height)
+        view.addSubview(mainScrollView)
+        mainScrollView.addSubview(contentView)
         setupUI()
         addData()
     }
@@ -61,16 +68,16 @@ extension DetailViewController {
         descriptionLabel = UILabel()
         titleLabel = UILabel()
         
-        view.addSubview(scrollView)
-        view.addSubview(createDateLabel)
-        view.addSubview(descriptionLabel)
-        view.addSubview(titleLabel)
+        contentView.addSubview(scrollView)
+        contentView.addSubview(createDateLabel)
+        contentView.addSubview(descriptionLabel)
+        contentView.addSubview(titleLabel)
 
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         createDateLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-    
+        
         descriptionLabel.numberOfLines = 0
         titleLabel.numberOfLines = 0
         titleLabel.textAlignment = .center
@@ -84,13 +91,13 @@ extension DetailViewController {
         scrollView.contentInsetAdjustmentBehavior = .never
         
         pageControl = UIPageControl()
-        view.addSubview(pageControl)
+        contentView.addSubview(pageControl)
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         pageControl.isUserInteractionEnabled = false
         pageControl.currentPageIndicatorTintColor = .black
         pageControl.pageIndicatorTintColor = .gray
         
-        let guide = view.safeAreaLayoutGuide
+        let guide = contentView.safeAreaLayoutGuide
         let spacing = CGFloat(16)
         
         NSLayoutConstraint.activate([
