@@ -36,7 +36,8 @@ class DetailViewController: UIViewController {
         title = ""
         mainScrollView = UIScrollView(frame: view.frame)
         contentView = UIView(frame: view.frame)
-        mainScrollView.contentSize = contentView.bounds.size//.init(width: view.frame.width, height: view.frame.height)
+        mainScrollView.contentSize = contentView.bounds.size
+        mainScrollView.showsVerticalScrollIndicator = false
         view.addSubview(mainScrollView)
         mainScrollView.addSubview(contentView)
         setupUI()
@@ -77,8 +78,9 @@ extension DetailViewController {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         createDateLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.numberOfLines = 0
+//        descriptionLabel.contentMode = .scaleAspectFit
         titleLabel.numberOfLines = 0
         titleLabel.textAlignment = .center
         titleLabel.font = .boldSystemFont(ofSize: 20)
@@ -101,6 +103,12 @@ extension DetailViewController {
         let spacing = CGFloat(16)
         
         NSLayoutConstraint.activate([
+            contentView.widthAnchor.constraint(equalToConstant: view.frame.width),
+            contentView.topAnchor.constraint(equalTo: mainScrollView.topAnchor),
+            contentView.leftAnchor.constraint(equalTo: mainScrollView.leftAnchor),
+            contentView.rightAnchor.constraint(equalTo: mainScrollView.rightAnchor),
+            contentView.bottomAnchor.constraint(equalTo: mainScrollView.bottomAnchor),
+            
             scrollView.heightAnchor.constraint(equalToConstant: view.frame.height / 3),
             scrollView.topAnchor.constraint(equalTo: guide.topAnchor),
             scrollView.leftAnchor.constraint(equalTo: guide.leftAnchor),
